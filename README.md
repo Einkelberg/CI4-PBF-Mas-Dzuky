@@ -187,8 +187,77 @@ class News extends BaseController
         $data['news'] = $model->getNews($slug);
     }
 }
-lalu modify fungsi index
+```
+lalu modify fungsi index untuk mengembalikan view
+```shell
+public function index()
+    {
+        $model = model(NewsModel::class);
+
+        $data = [
+            'news'  => $model->getNews(),//data dari database
+            'title' => 'News archive',//
+        ];
+
+        return view('templates/header', $data)
+            . view('news/index')
+            . view('templates/footer');
+    }
+```
+dan modify juga fungsi show untuk mengembalikan view 
+```shell
+public function show($slug = null)
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->getNews($slug);
+
+        if (empty($data['news'])) {
+            throw new PageNotFoundException('Cannot find the news item: ' . $slug);
+        }
+
+        $data['title'] = $data['news']['title'];
+
+        return view('templates/header', $data)
+            . view('news/view')
+            . view('templates/footer');
+    }
 ```
 ###Routing
-
+Tambahkan pada routes.php routing untuk coontroller news
+```shell
+use App\Controllers\News; 
+$routes->get('news', [News::class, 'index']);           
+$routes->get('news/(:segment)', [News::class, 'show']); 
+```
 ###view
+Buat folder dan file pada app/Views/News/index.php dan buat tampilan untuk title perulangan untuk semua news dan juga kondisi jika tidak ada news
+```shell
+<h2><?= esc($title) ?></h2>
+
+<?php if (! empty($news) && is_array($news)): ?>
+
+    <?php foreach ($news as $news_item): ?>
+
+        <h3><?= esc($news_item['title']) ?></h3>
+
+        <div class="main">
+            <?= esc($news_item['body']) ?>
+        </div>
+        <p><a href="/news/<?= esc($news_item['slug'], 'url') ?>">View article</a></p>
+
+    <?php endforeach ?>
+
+<?php else: ?>
+
+    <h3>No News</h3>
+
+    <p>Unable to find any news for you.</p>
+
+<?php endif ?>
+```
+dan buat juga app/Views/News/view.php untuk menampilkan data news secara spesifik sesuai slug
+```shell
+<h2><?= esc($news['title']) ?></h2>
+<p><?= esc($news['body']) ?></p>
+```
