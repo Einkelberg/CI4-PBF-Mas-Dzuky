@@ -14,7 +14,7 @@ More information about the plans for version 4 can be found in [CodeIgniter 4](h
 You can read the [user guide](https://codeigniter.com/user_guide/)
 corresponding to the latest version of the framework.
 
-# Instalasi
+# 1. Instalasi
 Untuk instalasi CI4 diperlukan composer terinstall pada device.
 pada cmd pilih folder yang diingikan dengan 
 ```shell
@@ -45,7 +45,7 @@ lalu ubah nama menjadi .env
  database.default.password = 
  database.default.DBDriver = MySQLi
 ```
-# Static Page
+# 2. Static Page
 ### Controller
 pada app/controller buat file Pages.php
 dan buat controller dengan function view sesuaing dengan kode dibawah
@@ -125,7 +125,7 @@ http://localhost:8080/about
 
 
 
-#Page News item dengan Database
+# 3. Page News item dengan Database
 ### Buat Database 
 Buat database ci4tutorial lalu buat table dengan kode sql berikut
 ```
@@ -266,7 +266,7 @@ pada localhost:8080/news akan ada tampilan bahwa belum ada news
 ![empty news](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/0a10c2d1-e8f5-43c8-b4db-8e0bb8aad2ab)
 
 
-# Create News Items
+# 4. Create News Items
 
 ### Enabling csrf
 buka app/Config/Filters.php dan ubah method menjadi post => csrf
