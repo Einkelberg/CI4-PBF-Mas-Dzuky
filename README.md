@@ -266,4 +266,43 @@ pada localhost:8080/news akan ada tampilan bahwa belum ada news
 ![empty news](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/0a10c2d1-e8f5-43c8-b4db-8e0bb8aad2ab)
 
 
-# Create New News
+# Create News Items
+
+### Enabling csrf
+buka app/Config/Filters.php dan ubah method menjadi post => csrf
+```shell
+    public array $methods = [
+        'post' => ['csrf'],
+    ];
+```
+csrf digunakan untuk alasan security yang akan mengirimkan token setiap kali form diisi memastikan bahwa form tersebut merupakan authorized form
+
+### Route
+pada routes.php tambahkan route baru yang akan digunakan untuk mengakses form dan juga mengirim data baru dengan method post
+```shell
+$routes->get('news/new', [News::class, 'new']);
+$routes->post('news', [News::class, 'create']);
+```
+
+### Buat Form
+Buat file create.php pada app/Views/news dan buat form untuk menginput title dan body dari news
+```shell
+<h2><?= esc($title) ?></h2>
+
+<?= session()->getFlashdata('error') ?>/
+<?= validation_list_errors() ?> // untuk melihat error yang ditimbulkan dari form
+
+<form action="/news" method="post">
+    <?= csrf_field() ?> // form akan mengirimkan csrf token
+
+    <label for="title">Title</label>
+    <input type="input" name="title" value="<?= set_value('title') ?>">
+    <br>
+
+    <label for="body">Text</label>
+    <textarea name="body" cols="45" rows="4"><?= set_value('body') ?></textarea>
+    <br>
+
+    <input type="submit" name="submit" value="Create news item">
+</form>
+```
