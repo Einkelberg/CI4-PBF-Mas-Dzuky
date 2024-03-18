@@ -123,3 +123,22 @@ http://localhost:8080/about
 
 ![about](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/2f21b04e-27a4-45a4-af35-9fa70f0c44b8)
 
+
+
+##Buat News item
+#buat database ci4tutorial 
+#buat table
+```
+CREATE TABLE news (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    title VARCHAR(128) NOT NULL,
+    slug VARCHAR(128) NOT NULL,
+    body TEXT NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE slug (slug) //url identifier
+);
+```
+#Model
+#Controller
+#Routing
+#view
