@@ -3,14 +3,16 @@
 use CodeIgniter\Router\RouteCollection;
 use App\Controllers\Pages;
 use App\Controllers\News;
+use App\Controllers\Admin;
 
 /**
  * @var RouteCollection $routes
  */
 
+$routes->get('admin', 'Admin::index');
 $routes->get('news', [News::class, 'index']);
-$routes->get('news/new', [News::class, 'new']); // Add this line
-$routes->post('news', [News::class, 'create']); // Add this line
+$routes->get('news/new', [News::class, 'new']); 
+$routes->post('news', [News::class, 'create']); 
 $routes->get('news/(:segment)', [News::class, 'show']);
 
 
