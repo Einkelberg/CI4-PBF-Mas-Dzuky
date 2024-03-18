@@ -34,6 +34,7 @@ buka folder ci yang terinstall pada vscode lalu klik ctrl+` untuk membuka termin
 lalu app dapat dibuka melalui web dengan alamat (http://localhost:8080/)
 ## Membuat Page
 sebelum coding sebaiknya pada file env ubah ENVIRONMENT ke develpment untuk mempermudah debugging dan testing dan juga ubah  DATABASE supaya tersambung ke database masing masing
+lalu ubah nama menjadi .env
 ```shell
  CI_ENVIRONMENT = development
 ```
@@ -109,7 +110,12 @@ dan jangan lupa untuk use App\Controllers\Pages
 ```shell
 use App\Controllers\Pages;
 
+$routes->get('pages', [Pages::class, 'index']);
 $routes->get('(:segment)', [Pages::class, 'view']);
 ```
-## 
+#Test
+coba akses page tersebut dengan cara
+http://localhost:8080/home
+atau
+http://localhost:8080/about
 
