@@ -362,7 +362,7 @@ buat success.php pada folder app/Views/news dan gunakan page itu untuk menampilk
 ```
 ![success](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/da3ad7a9-e10a-4d85-b207-51abd193c5f3)
 
-# Application Struncture
+# 5. Application Struncture
 Setelah menginstal CI4 akan ada beberapa folder yang dapat ditemukan didalam folder seperti app, public, writable, test dan vendor atau system
 
 ### App 
@@ -380,3 +380,18 @@ app/
     ThirdParty/     ThirdParty libraries yang bisa digunakan
     Views/          HTML file yang nantinya akan ditampilkan ke client
 ```
+semua file tersebut dapat dikeluarkan dari app dengan cara mengganti konfigurasi dari app/Config/Constants.php
+
+### System
+Directory yang merupakan bagian dari framework itu sendiri berisi class yang tidak boleh diubah tetapi bisa di extend untuk digunakan.
+### Public
+Directory ini tersambung dengan browser yang mencegah akses browser langsung ke code. Directory ini berisi .htaccess, index.php dan gambar/css/js/dll
+### Writable
+Directory ini berisi logs, file cache , dan apapun yang user upload dari website. Menjadikan direktory lain lebih bersih dan juga mencegah penulisan pada code dari user
+### Test
+Directory ini digunakan untuk menyimpan file test dan juga menyimpan segala jenis mock class dan utilities. Directory ini tidak perlu diupload ke server.
+### Mengubah Dierctory
+Jika ingin mengubah directory maka harus dilakuakan dari dari app/Config/Paths.php
+
+
+# da
