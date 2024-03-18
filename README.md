@@ -24,7 +24,6 @@ lalu pada folder yang diinginkan mulai instalasi dengan cara mengetikan ini pada
 ```shell
   composer create-project codeigniter4/appstarter nama-project
 ```
-# Running App
 untuk menjalankan app CI4 dapat dilakukan dari visual studio code, dengan cara
 buka folder ci yang terinstall pada vscode lalu klik ctrl+` untuk membuka terminal lalu ketikan
 
@@ -32,7 +31,7 @@ buka folder ci yang terinstall pada vscode lalu klik ctrl+` untuk membuka termin
   php spark serve
 ```
 lalu app dapat dibuka melalui web dengan alamat (http://localhost:8080/)
-# Membuat Page
+# 2. Konfigurasi CI4
 sebelum coding sebaiknya pada file env ubah ENVIRONMENT ke develpment untuk mempermudah debugging dan testing dan juga ubah  DATABASE supaya tersambung ke database masing masing
 lalu ubah nama menjadi .env
 ```shell
@@ -45,7 +44,7 @@ lalu ubah nama menjadi .env
  database.default.password = 
  database.default.DBDriver = MySQLi
 ```
-# 2. Static Page
+# 3. Static Page
 ### Controller
 pada app/controller buat file Pages.php
 dan buat controller dengan function view sesuaing dengan kode dibawah
@@ -125,7 +124,7 @@ http://localhost:8080/about
 
 
 
-# 3. Page News item dengan Database
+# 4. Page News item dengan Database
 ### Buat Database 
 Buat database ci4tutorial lalu buat table dengan kode sql berikut
 ```
@@ -266,7 +265,7 @@ pada localhost:8080/news akan ada tampilan bahwa belum ada news
 ![empty news](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/0a10c2d1-e8f5-43c8-b4db-8e0bb8aad2ab)
 
 
-# 4. Create News Items
+# 5. Create News Items
 
 ### Enabling csrf
 buka app/Config/Filters.php dan ubah method menjadi post => csrf
@@ -362,7 +361,7 @@ buat success.php pada folder app/Views/news dan gunakan page itu untuk menampilk
 ```
 ![success](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/da3ad7a9-e10a-4d85-b207-51abd193c5f3)
 
-# 5. Application Struncture
+# 6. Application Struncture
 Setelah menginstal CI4 akan ada beberapa folder yang dapat ditemukan didalam folder seperti app, public, writable, test dan vendor atau system
 
 ### App 
@@ -394,7 +393,7 @@ Directory ini digunakan untuk menyimpan file test dan juga menyimpan segala jeni
 Jika ingin mengubah directory maka harus dilakuakan dari dari app/Config/Paths.php
 
 
-# 6. MVC
+# 7. MVC
 MVC merupakan sebuah pola mengorganisir file  dimana data, presentasi dan alur kerja merupakan bagian terpisah.
 
 ### Views
@@ -413,4 +412,79 @@ Controller menerima input dan menentukan apa yang akan dilakukan, seperti mengir
 Controller juga mengurus http request, autentikasi, security dll.
 
 
-# 7.
+# 8.Migration
+sebelum memulai pada file env ubah DATABASE supaya tersambung ke database masing masing lalu ubah nama menjadi .env
+```shell
+ database.default.hostname = localhost
+ database.default.database = ci4
+ database.default.username = root
+ database.default.password = 
+ database.default.DBDriver = MySQLi
+```
+pada terminal ketik
+```shell
+php spark db:create ci_news
+```
+untuk membuat database baru dengan nama ci_news
+setelah itu buat migration dengan nama news
+```shell
+php spark migrate:create news
+```
+maka pada app/database/migration akan terbuat file tgl_news.php
+![image](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/9f42829a-6526-41d7-9a0a-410ce9d1b133)
+
+pada file terdapat dua fungsi up() yang akan dijalankan ketika migrasi dan down() yang akan dijalankan ketika rollback dimana fungsi up akan menjalankan instruksi seperti membuat tabel news sedangkan fungsi down dapat digunakan untuk membatalkan apa yang dilakukan seperti drop table.
+
+sekarang isi file news untuk membuat table news dengan cara addfield pada fungsi up dan isikan dengan kolom yang diinginkan
+```shell
+<?php
+namespace App\Database\Migrations;
+use CodeIgniter\Database\Migration;
+
+class News extends Migration
+{
+	public function up()
+	{
+		// Membuat kolom untuk tabel news
+		$this->forge->addField([
+			'id'          => [
+				'type'           => 'INT',
+				'constraint'     => 5,
+				'unsigned'       => true,
+				'auto_increment' => true
+			],
+			'title'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255'
+			],
+			'author'      => [
+				'type'           => 'VARCHAR',
+				'constraint'     => 100,
+				'default'        => 'John Doe',
+			],
+			'content' => [
+				'type'           => 'TEXT',
+				'null'           => true,
+			],
+			'status'      => [
+				'type'           => 'ENUM',
+				'constraint'     => ['published', 'draft'],
+				'default'        => 'draft',
+			],
+		]);
+
+		// Membuat primary key
+		$this->forge->addKey('id', TRUE);
+
+		// Membuat tabel news
+		$this->forge->createTable('news', TRUE);
+	}
+
+	public function down()
+	{
+		// menghapus tabel news
+		$this->forge->dropTable('news');
+	}
+}
+```
+
