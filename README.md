@@ -150,18 +150,43 @@ use CodeIgniter\Model;
 
 class NewsModel extends Model
 {
-    protected $table = 'news';
+    protected $table = 'news'; // untuk mengambil data dari database dengan nama table 'news'
 
-    public function getNews($slug = false)
+    public function getNews($slug = false) // fungsi mengambil data dari table dengan default $slug=false
     {
-        if ($slug === false) {
+        if ($slug === false) {  // jika tidak ada slug, makaambil semua data
             return $this->findAll();
         }
 
-        return $this->where(['slug' => $slug])->first();
+        return $this->where(['slug' => $slug])->first(); // jika $slug = true maka ambil data sesuai $slug tersebut
     }
 }
 ```
 ###Controller
+Buat Controller news.php pada app/controller lalu buat fungsi untuk mengambil data dari model
+```shell
+<?php
+
+namespace App\Controllers;
+
+use App\Models\NewsModel;
+
+class News extends BaseController
+{
+    public function index()// ambil semua data karena getNews() tanpa parameter(default)
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->getNews();
+    }
+
+    public function show($slug = null)// ambil data sesuai slug karena getNews($slug) punya parameter
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->getNews($slug);
+    }
+}
+```
 ###Routing
 ###view
