@@ -126,7 +126,7 @@ http://localhost:8080/about
 
 
 #Page News item dengan Database
-###Buat Database 
+### Buat Database 
 Buat database ci4tutorial lalu buat table dengan kode sql berikut
 ```
 CREATE TABLE news (
@@ -138,7 +138,7 @@ CREATE TABLE news (
     UNIQUE slug (slug) //url identifier
 );
 ```
-###Model
+### Model
 buat NewsModel.php pada app/Models
 dan buat
 ```shell
@@ -162,7 +162,7 @@ class NewsModel extends Model
     }
 }
 ```
-###Controller
+### Controller
 Buat Controller news.php pada app/controller lalu buat fungsi untuk mengambil data dari model
 ```shell
 <?php
@@ -223,14 +223,14 @@ public function show($slug = null)
             . view('templates/footer');
     }
 ```
-###Routing
+### Routing
 Tambahkan pada routes.php routing untuk coontroller news
 ```shell
 use App\Controllers\News; 
 $routes->get('news', [News::class, 'index']);           
 $routes->get('news/(:segment)', [News::class, 'show']); 
 ```
-###view
+### view
 Buat folder dan file pada app/Views/News/index.php dan buat tampilan untuk title perulangan untuk semua news dan juga kondisi jika tidak ada news
 ```shell
 <h2><?= esc($title) ?></h2>
