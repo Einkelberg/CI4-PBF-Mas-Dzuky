@@ -496,4 +496,29 @@ maka table news akan terbentuk
 ![image](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/3419a5d6-7b93-4ae9-b27b-25b87eff41df)
 
 
-# 9.
+# 9.Routing dan Controller
+Pada CI4 untuk mengakses views dapat dilakukan dengan routing 	
+pada app/Config/routes.php
+dapat ditambahkan 
+```shell
+$routes->get('admin', 'admin::index');
+```
+untuk mengakses fungsi index dalam controller admin
+dimana controller admin memilki tampilan sebagai berikut
+```shell
+<?php
+
+namespace App\Controllers;
+
+class Admin extends BaseController
+{
+    public function index(): string
+    {
+        return view('admin_view');
+    }
+}
+```
+maka ketika mengakses http://localhost:8080/admin 
+admin_view akan diakses.
+
+# 10.
