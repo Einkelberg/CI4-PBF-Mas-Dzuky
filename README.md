@@ -394,4 +394,23 @@ Directory ini digunakan untuk menyimpan file test dan juga menyimpan segala jeni
 Jika ingin mengubah directory maka harus dilakuakan dari dari app/Config/Paths.php
 
 
-# da
+# 6. MVC
+MVC merupakan sebuah pola mengorganisir file  dimana data, presentasi dan alur kerja merupakan bagian terpisah.
+
+### Views
+Views biasanya terisi dari HTML dan beberapa PHP  dimana Views ini berfungsi menapilkan komponen yang didapat dari Controller.
+Views biasanya tersimpan di app/Views dan untuk pengorganisiannya diharapkan untuk setiap views yang menngunakan Controller yag sama maka dijadikan satu folder
+Contoh :
+app/Views/user/profile.php.
+app/Views/admin/profile.php.
+
+### Models
+Model berfungsi untuk menjaga sebuah data pada aplikasi seperti pengguna, admin, transaksi.
+Model berguna untuk menentukan aturan mengambil dan menginput ke database dan juga handling penympanan dan mengambilan data dari database.
+
+### Controllers
+Controller menerima input dan menentukan apa yang akan dilakukan, seperti mengirimkan input user dari views lalu dikirimkan ke model untuk disimpan.
+Controller juga mengurus http request, autentikasi, security dll.
+
+
+# 7.
