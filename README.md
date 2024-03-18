@@ -261,3 +261,9 @@ dan buat juga app/Views/News/view.php untuk menampilkan data news secara spesifi
 <h2><?= esc($news['title']) ?></h2>
 <p><?= esc($news['body']) ?></p>
 ```
+pada localhost:8080/news akan ada tampilan bahwa belum ada news
+
+![empty news](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/0a10c2d1-e8f5-43c8-b4db-8e0bb8aad2ab)
+
+
+# Create New News
