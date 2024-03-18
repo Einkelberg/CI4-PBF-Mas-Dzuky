@@ -46,18 +46,27 @@ sebelum coding sebaiknya pada file env ubah ENVIRONMENT ke develpment untuk memp
 ```
 ## Static Page
 # Controller
-pada app/controller buat file about.php
-dan buat controller dengan function index yang akan mengembalikan nilai 'about_view'
+pada app/controller buat file Pages.php
+dan buat controller dengan function view sesuaing dengan kode dibawah
 ```shell
 <?php
 
 namespace App\Controllers;
+use CodeIgniter\Exceptions\PageNotFoundException; //untuk exception
 
-class About extends BaseController
+class Page extends BaseController
 {
-    public function index(): string
+    public function view($page = 'home')
     {
-        return view('about_view');
+            if (! is_file(APPPATH . 'Views/pages/' . $page . '.php')) {// kondisi untuk menangkap error not found
+            throw new PageNotFoundException($page);
+        }
+
+        $data['title'] = ucfirst($page);
+
+        return view('templates/header', $data)
+            . view('pages/' . $page)
+            . view('templates/footer');
     }
 }
 
