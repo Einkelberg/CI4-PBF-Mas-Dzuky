@@ -95,21 +95,21 @@ untuk template setiap page yang akan dibuat buatlah kedua file tersebut lalu isi
 </body>
 </html>
  ```
-Sekarang pada app/Views buat about_view.php
+Sekarang pada app/Views/pages //buat foldernya jika belum ada
+buat about.php
 lalu buat html untuk menyatakan bahwa page itu merupakan page about
 ```shell
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    About
-</body>
-</html>
+    <h1>About</h1>
+
 ```
 # Route
+pada app/config/routes.php
+buat route baru yang akan memanggil fungsi pada controller tadi
+dan jangan lupa untuk use App\Controllers\Pages
+```shell
+use App\Controllers\Pages;
+
+$routes->get('(:segment)', [Pages::class, 'view']);
+```
 ## 
 
