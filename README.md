@@ -187,6 +187,8 @@ class News extends BaseController
         $data['news'] = $model->getNews($slug);
     }
 }
+lalu modify fungsi index
 ```
 ###Routing
+
 ###view
