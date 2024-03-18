@@ -360,5 +360,23 @@ buat success.php pada folder app/Views/news dan gunakan page itu untuk menampilk
 ```shell
 <p>News item created successfully.</p>
 ```
-
 ![success](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/da3ad7a9-e10a-4d85-b207-51abd193c5f3)
+
+# Application Struncture
+Setelah menginstal CI4 akan ada beberapa folder yang dapat ditemukan didalam folder seperti app, public, writable, test dan vendor atau system
+
+### App 
+Directory app adalah dimana kebannyakan kode dibuat dan directory app juga mempunnyai structure yang mudah digunakan.
+```shell
+app/
+    Config/         Menimpan konfigurasi
+    Controllers/    Pengendali alur kerja
+    Database/       Menympan Database Migrasi dan seed
+    Filters/        Menyimpan class yang difilter supaya bisa dijalankan setelah atau sebelum Controller
+    Helpers/        Menyipan fungsi bantuan yang dapat berdiri sendiri
+    Language/       Berisi beberapa bantuan untuk beberapa bahasa tertentu
+    Libraries/      Class penting yang tidak dapat dikelompokan ke class lain
+    Models/         Model yang mempresentasikan entity pada database
+    ThirdParty/     ThirdParty libraries yang bisa digunakan
+    Views/          HTML file yang nantinya akan ditampilkan ke client
+```
