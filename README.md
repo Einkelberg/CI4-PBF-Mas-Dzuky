@@ -306,3 +306,59 @@ Buat file create.php pada app/Views/news dan buat form untuk menginput title dan
     <input type="submit" name="submit" value="Create news item">
 </form>
 ```
+### Controller
+buat fungsi baru pada controller news untuk menuju form
+```shell
+public function new()
+    {
+        helper('form');
+
+        return view('templates/header', ['title' => 'Create a news item'])
+            . view('news/create')
+            . view('templates/footer');
+    }
+```
+dan juga tambahkan fungsi untuk membuat news
+```shell
+public function create()
+    {
+        helper('form');
+
+        $data = $this->request->getPost(['title', 'body']);
+
+        
+        if (! $this->validateData($data, [ //cek data berdasar yang dikirimkan form
+            'title' => 'required|max_length[255]|min_length[3]',
+            'body'  => 'required|max_length[5000]|min_length[10]',
+        ])) {
+            // kondisi jika gagal
+            return $this->new();
+        }
+
+        $post = $this->validator->getValidated();
+
+        $model = model(NewsModel::class);
+
+        $model->save([ //menyimpan data dari form
+            'title' => $post['title'],
+            'slug'  => url_title($post['title'], '-', true),
+            'body'  => $post['body'],
+        ]);
+
+        return view('templates/header', ['title' => 'Create a news item'])
+            . view('news/success')
+            . view('templates/footer');
+    }
+```
+### Model
+Pada NewsModel tambahkan allowed field supaya dapat ditambahkan valuenya
+```shell
+    protected $allowedFields = ['title', 'slug', 'body'];
+```
+### Views
+buat success.php pada folder app/Views/news dan gunakan page itu untuk menampilkan pesan berhasil seperti
+```shell
+<p>News item created successfully.</p>
+```
+
+![success](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/da3ad7a9-e10a-4d85-b207-51abd193c5f3)
