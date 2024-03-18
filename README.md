@@ -1,20 +1,18 @@
 # CodeIgniter 4 Application Starter
 
-# What is CodeIgniter?
+# 1. Pengenalan CodeIgniter 4
+CodeIgniter merupakan Framework PHP yang menggunakan metode MVC ( Model, View, Controller).
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+MVC merupakan konsep yang memisahkan komponen menjadi 3 bagian :
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+Model
+Model merupakan bagian  yang menangani manipulasi data dengan database, seperti mengambil dan mengisi data dari database, dan proses crud atau intruksi yang berhubungan dengan database diletakan di dalam model.
+View
+View merupakan bagian penanganan interface yang muncul kepada client, dengan memisahkan controller dengan model dapat memudahkan pengembangan pada tampilan halaman web.
+Controller
+Controller merupakan bagian alur kerja yang menghubungkan model dan view, jadi controller merupakan instruksi yang berfungsi menghubungkan dari model dan view.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
-
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
-
-# 1. Instalasi
+# 2. Instalasi
 Untuk instalasi CI4 diperlukan composer terinstall pada device.
 pada cmd pilih folder yang diingikan dengan 
 ```shell
@@ -31,7 +29,7 @@ buka folder ci yang terinstall pada vscode lalu klik ctrl+` untuk membuka termin
   php spark serve
 ```
 lalu app dapat dibuka melalui web dengan alamat (http://localhost:8080/)
-# 2. Konfigurasi CI4
+# 3. Konfigurasi CI4
 sebelum coding sebaiknya pada file env ubah ENVIRONMENT ke develpment untuk mempermudah debugging dan testing dan juga ubah  DATABASE supaya tersambung ke database masing masing
 lalu ubah nama menjadi .env
 ```shell
@@ -44,7 +42,7 @@ lalu ubah nama menjadi .env
  database.default.password = 
  database.default.DBDriver = MySQLi
 ```
-# 3. Static Page
+# 4. Static Page
 ### Controller
 pada app/controller buat file Pages.php
 dan buat controller dengan function view sesuaing dengan kode dibawah
@@ -124,7 +122,7 @@ http://localhost:8080/about
 
 
 
-# 4. Page News item dengan Database
+# 5. Page News item dengan Database
 ### Buat Database 
 Buat database ci4tutorial lalu buat table dengan kode sql berikut
 ```
@@ -265,7 +263,7 @@ pada localhost:8080/news akan ada tampilan bahwa belum ada news
 ![empty news](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/0a10c2d1-e8f5-43c8-b4db-8e0bb8aad2ab)
 
 
-# 5. Create News Items
+# 6. Create News Items
 
 ### Enabling csrf
 buka app/Config/Filters.php dan ubah method menjadi post => csrf
@@ -361,7 +359,7 @@ buat success.php pada folder app/Views/news dan gunakan page itu untuk menampilk
 ```
 ![success](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/da3ad7a9-e10a-4d85-b207-51abd193c5f3)
 
-# 6. Application Struncture
+# 7. Application Struncture
 Setelah menginstal CI4 akan ada beberapa folder yang dapat ditemukan didalam folder seperti app, public, writable, test dan vendor atau system
 
 ### App 
@@ -393,7 +391,7 @@ Directory ini digunakan untuk menyimpan file test dan juga menyimpan segala jeni
 Jika ingin mengubah directory maka harus dilakuakan dari dari app/Config/Paths.php
 
 
-# 7. MVC
+# 8. MVC
 MVC merupakan sebuah pola mengorganisir file  dimana data, presentasi dan alur kerja merupakan bagian terpisah.
 
 ### Views
@@ -412,11 +410,11 @@ Controller menerima input dan menentukan apa yang akan dilakukan, seperti mengir
 Controller juga mengurus http request, autentikasi, security dll.
 
 
-# 8.Migration
+# 9.Migration
 sebelum memulai pada file env ubah DATABASE supaya tersambung ke database masing masing lalu ubah nama menjadi .env
 ```shell
  database.default.hostname = localhost
- database.default.database = ci4
+ database.default.database = cinews
  database.default.username = root
  database.default.password = 
  database.default.DBDriver = MySQLi
@@ -487,4 +485,38 @@ class News extends Migration
 	}
 }
 ```
+
+untuk melakukan migrasi dan mengeksukusi fungsi up tersebut ketik ini pada terminal
+```shell
+php spark migrate
+```
+maka table news akan terbentuk
+![image](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/3419a5d6-7b93-4ae9-b27b-25b87eff41df)
+
+
+# 10.Routing dan Controller
+Pada CI4 untuk mengakses views dapat dilakukan dengan routing 	
+pada app/Config/routes.php
+dapat ditambahkan 
+```shell
+$routes->get('admin', 'admin::index');
+```
+untuk mengakses fungsi index dalam controller admin
+dimana controller admin memilki tampilan sebagai berikut
+```shell
+<?php
+
+namespace App\Controllers;
+
+class Admin extends BaseController
+{
+    public function index(): string
+    {
+        return view('admin_view');
+    }
+}
+```
+maka ketika mengakses http://localhost:8080/admin 
+admin_view akan diakses.
+
 
