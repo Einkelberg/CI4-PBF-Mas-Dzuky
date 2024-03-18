@@ -416,7 +416,7 @@ Controller juga mengurus http request, autentikasi, security dll.
 sebelum memulai pada file env ubah DATABASE supaya tersambung ke database masing masing lalu ubah nama menjadi .env
 ```shell
  database.default.hostname = localhost
- database.default.database = ci4
+ database.default.database = cinews
  database.default.username = root
  database.default.password = 
  database.default.DBDriver = MySQLi
@@ -488,3 +488,12 @@ class News extends Migration
 }
 ```
 
+untuk melakukan migrasi dan mengeksukusi fungsi up tersebut ketik ini pada terminal
+```shell
+php spark migrate
+```
+maka table news akan terbentuk
+![image](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/3419a5d6-7b93-4ae9-b27b-25b87eff41df)
+
+
+# 9.
