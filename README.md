@@ -116,6 +116,8 @@ $routes->get('(:segment)', [Pages::class, 'view']);
 #Test
 coba akses page tersebut dengan cara
 http://localhost:8080/home
+![home](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/38f63102-5d69-4ccd-9f3c-1a09c50f02ce)
 atau
 http://localhost:8080/about
+![about](https://github.com/Einkelberg/CI4-PBF-Mas-Dzuky/assets/127199885/2f21b04e-27a4-45a4-af35-9fa70f0c44b8)
 
