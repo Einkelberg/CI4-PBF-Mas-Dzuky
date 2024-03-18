@@ -1,6 +1,6 @@
 # CodeIgniter 4 Application Starter
 
-## What is CodeIgniter?
+### What is CodeIgniter?
 
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
 More information can be found at the [official site](https://codeigniter.com).
@@ -14,7 +14,7 @@ More information about the plans for version 4 can be found in [CodeIgniter 4](h
 You can read the [user guide](https://codeigniter.com/user_guide/)
 corresponding to the latest version of the framework.
 
-## Instalasi
+### Instalasi
 Untuk instalasi CI4 diperlukan composer terinstall pada device.
 pada cmd pilih folder yang diingikan dengan 
 ```shell
@@ -24,7 +24,7 @@ lalu pada folder yang diinginkan mulai instalasi dengan cara mengetikan ini pada
 ```shell
   composer create-project codeigniter4/appstarter nama-project
 ```
-## Running App
+### Running App
 untuk menjalankan app CI4 dapat dilakukan dari visual studio code, dengan cara
 buka folder ci yang terinstall pada vscode lalu klik ctrl+` untuk membuka terminal lalu ketikan
 
@@ -32,7 +32,7 @@ buka folder ci yang terinstall pada vscode lalu klik ctrl+` untuk membuka termin
   php spark serve
 ```
 lalu app dapat dibuka melalui web dengan alamat (http://localhost:8080/)
-## Membuat Page
+### Membuat Page
 sebelum coding sebaiknya pada file env ubah ENVIRONMENT ke develpment untuk mempermudah debugging dan testing dan juga ubah  DATABASE supaya tersambung ke database masing masing
 lalu ubah nama menjadi .env
 ```shell
@@ -45,7 +45,7 @@ lalu ubah nama menjadi .env
  database.default.password = 
  database.default.DBDriver = MySQLi
 ```
-## Static Page
+### Static Page
 # Controller
 pada app/controller buat file Pages.php
 dan buat controller dengan function view sesuaing dengan kode dibawah
@@ -125,9 +125,9 @@ http://localhost:8080/about
 
 
 
-##Buat News item
-#buat database ci4tutorial 
-#buat table
+###Page News item dengan Database
+#Buat Database 
+Buat database ci4tutorial lalu buat table dengan kode sql berikut
 ```
 CREATE TABLE news (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -139,6 +139,29 @@ CREATE TABLE news (
 );
 ```
 #Model
+buat NewsModel.php pada app/Models
+dan buat
+```shell
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class NewsModel extends Model
+{
+    protected $table = 'news';
+
+    public function getNews($slug = false)
+    {
+        if ($slug === false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['slug' => $slug])->first();
+    }
+}
+```
 #Controller
 #Routing
 #view
